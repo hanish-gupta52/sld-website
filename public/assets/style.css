@@ -124,6 +124,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .search input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; padding: 17px 0; color: var(--ink); }
 .page-hero .search { margin-left: 0; } .page-hero .search label { border: 1px solid var(--line); }
 .quick { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 14px; }
+.hero .quick { margin-top: 26px; }
 .quick a { display: inline-flex; align-items: center; gap: 9px; background: rgba(255, 255, 255, .92); padding: 9px 16px 9px 10px; border-radius: 999px; font-weight: 600; font-size: .88rem; box-shadow: 0 4px 14px -8px rgba(12, 29, 22, .3); }
 .quick a:hover { background: #fff; transform: translateY(-1px); }
 .dot { width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; }

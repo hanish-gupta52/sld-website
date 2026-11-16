@@ -9,6 +9,8 @@ const { company: C, categories: CATS } = D;
 const OUT = path.join(__dirname, 'public');
 const SRC_ASSETS = path.join(__dirname, 'assets');
 
+// Version stamp so browsers always fetch the latest CSS/JS after an update
+const VER = require('crypto').createHash('md5').update(fs.readFileSync(path.join(SRC_ASSETS, 'style.css'))).update(fs.readFileSync(path.join(SRC_ASSETS, 'main.js'))).digest('hex').slice(0, 8);
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const wa = (text) => `https://wa.me/${C.whatsapp}?text=${encodeURIComponent(text)}`;
 const WA_DEFAULT = wa('Hello Sri Laxmi Distributor, I would like a bulk quote.');
@@ -80,7 +82,7 @@ const navItems = (p, active) => `
       <li class="has-sub"><a href="${p}about.html"${cur(active, 'about.html')}>About Us</a>${subWrap('About Us', D.aboutMenu.map(([id, t]) => `<a href="${p}about.html#${id}">${esc(t)}</a>`).join(''))}</li>
       <li class="has-sub mega-li"><a href="${p}products.html"${cur(active, 'products.html')}>Our Products</a>${subWrap('Our Products', CATS.map((c) => { const m = D.productMenu[c.slug]; return `<div class="mega-col"><a class="mega-head" href="${p}products/${c.slug}.html"><span class="dot tone-${c.tone}"></span>${esc(m.name)}</a>${m.items.map(([t, i]) => `<a href="${p}products/${c.slug}.html#${slug(c.sub[i][0])}">${esc(t)}</a>`).join('')}</div>`; }).join('') + `<div class="mega-panel"><b>2,000+ products in stock</b><span>Wholesale and retail, on one invoice.</span><a class="btn btn-dark btn-sm" href="${p}products.html">View all products ${icon('arrow')}</a><a class="btn btn-outline btn-sm" href="${p}catalogue.html">${icon('download')} Download catalogue</a></div>`, 'mega')}</li>
       <li><a href="${p}catalogue.html"${cur(active, 'catalogue.html')}>Catalogue</a></li>
-      <li class="has-sub"><a href="${p}blog.html"${cur(active, 'blog.html')}>Blog</a>${subWrap('Blog', D.blogMenu.map((t) => `<a href="${p}blog.html?cat=${slug(t)}">${t}</a>`).join(''))}</li>
+      <li><a href="${p}blog.html"${cur(active, 'blog.html')}>Blog</a></li>
       <li class="has-sub"><a href="${p}contact.html"${cur(active, 'contact.html')}>Contact Us</a>${subWrap('Contact Us', D.contactMenu.map(([id, t]) => `<a href="${p}contact.html#${id}">${t}</a>`).join(''))}</li>`;
 
 const header = (p, active) => `
@@ -186,7 +188,7 @@ const page = ({ file, title, desc, body, active, ld = [], cls = '' }) => {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="${p}assets/style.css">
+<link rel="stylesheet" href="${p}assets/style.css?v=${VER}">
 ${[org, ...ld].map((j) => `<script type="application/ld+json">${JSON.stringify(j)}</script>`).join('\n')}
 </head>
 <body class="${cls}">
@@ -197,7 +199,7 @@ ${body(p)}
 </main>
 ${footer(p)}
 <script>window.SLD={wa:"${C.whatsapp}"};</script>
-<script src="${p}assets/main.js" defer></script>
+<script src="${p}assets/main.js?v=${VER}" defer></script>
 </body>
 </html>`;
   const dest = path.join(OUT, file);
@@ -274,10 +276,6 @@ built.push(page({
     <ul class="hero-points">
       <li>${icon('bolt')}Quote within 24 hours</li><li>${icon('box')}2,000+ products</li><li>${icon('shield')}Authorised Freshwrapp distributor</li>
     </ul>
-    <form class="search" action="${p}products.html" method="get" role="search">
-      <label>${icon('search')}<input type="search" name="q" placeholder="What do you need? e.g. biryani container" aria-label="Search products"></label>
-      <button class="btn btn-dark" type="submit">Search ${icon('arrow')}</button>
-    </form>
     <div class="quick">
       ${CATS.slice(0, 4).map((c) => `<a href="${p}products/${c.slug}.html"><span class="dot tone-${c.tone}"></span>${c.name.replace(' (Freshwrapp)', '')}</a>`).join('')}
       <a href="${p}products.html">${icon('box')}View all</a>
