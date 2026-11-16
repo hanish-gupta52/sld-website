@@ -1,6 +1,10 @@
 // Sri Laxmi Distributor — small progressive enhancements
 (function () {
   document.documentElement.classList.add('js');
+  // Safety net: content must never stay hidden if a script fails or is slow
+  const showAll = () => document.querySelectorAll('.reveal').forEach((el) => el.classList.add('in'));
+  window.addEventListener('error', showAll);
+  setTimeout(showAll, 2500);
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
@@ -20,7 +24,7 @@
   }));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') subs.forEach((o) => { o.classList.remove('open'); if (o.contains(document.activeElement)) document.activeElement.blur(); }); });
   // Same-page menu links (e.g. Contact → Bulk Quote) should close the mobile menu
-  $('.drop-box a').forEach((a) => a.addEventListener('click', () => { if (links) links.classList.remove('open'); if (toggle) toggle.setAttribute('aria-expanded', 'false'); subs.forEach((o) => o.classList.remove('open')); }));
+  $$('.drop-box a').forEach((a) => a.addEventListener('click', () => { if (links) links.classList.remove('open'); if (toggle) toggle.setAttribute('aria-expanded', 'false'); subs.forEach((o) => o.classList.remove('open')); }));
 
   // Blog category filter (blog.html?cat=…)
   const blogCats = $('[data-blogcats]');
