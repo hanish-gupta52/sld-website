@@ -3,7 +3,7 @@ const cta = (text) => `<p class="post-cta">${text}</p>`;
 
 module.exports = [
   {
-    slug: 'best-eco-friendly-packaging-for-restaurants-in-hyderabad', tag: 'Eco packaging', art: 'plate', tone: 'leaf', date: '2026-10-12', read: 5,
+    slug: 'best-eco-friendly-packaging-for-restaurants-in-hyderabad', cat: 'Eco Packaging', tag: 'Eco packaging', art: 'plate', tone: 'leaf', date: '2026-10-12', read: 5,
     title: 'Best Eco-Friendly Packaging for Restaurants in Hyderabad',
     metaTitle: 'Best Eco-Friendly Packaging for Restaurants in Hyderabad | SLD',
     metaDesc: 'A practical guide to eco-friendly food packaging for Hyderabad restaurants: which bagasse, kraft and foil packs suit biryani, curries, tiffins and starters.',
@@ -27,7 +27,7 @@ module.exports = [
 ${cta('Want samples matched to your menu? <a href="../contact.html#quote">Request a quote</a> or message us on WhatsApp.')}`,
   },
   {
-    slug: 'bagasse-vs-plastic-which-is-right-for-your-food-business', tag: 'Comparison', art: 'plate', tone: 'leaf', date: '2026-09-28', read: 4,
+    slug: 'bagasse-vs-plastic-which-is-right-for-your-food-business', cat: 'Eco Packaging', tag: 'Comparison', art: 'plate', tone: 'leaf', date: '2026-09-28', read: 4,
     title: 'Bagasse vs Plastic: Which Is Right for Your Food Business?',
     metaTitle: 'Bagasse vs Plastic Packaging: An Honest Comparison | SLD Hyderabad',
     metaDesc: 'Bagasse vs plastic for plates and takeaway boxes — compare cost, heat resistance, leak performance, compliance and customer perception before you buy.',
@@ -51,7 +51,7 @@ ${cta('Want samples matched to your menu? <a href="../contact.html#quote">Reques
 ${cta('Compare both side by side — <a href="../products/bagasse-tableware.html">see the bagasse range</a> or <a href="../contact.html#quote">ask for a quote</a>.')}`,
   },
   {
-    slug: 'how-to-choose-the-right-paper-cup-size', tag: 'Buying guide', art: 'cup', tone: 'sky', date: '2026-09-10', read: 4,
+    slug: 'how-to-choose-the-right-paper-cup-size', cat: 'Buying Guides', tag: 'Buying guide', art: 'cup', tone: 'sky', date: '2026-09-10', read: 4,
     title: 'How to Choose the Right Paper Cup Size',
     metaTitle: 'How to Choose Paper Cup Sizes for Tea, Coffee & Cold Drinks | SLD',
     metaDesc: 'From 65 ml cutting chai to 350 ml cold coffee: a simple guide to paper cup sizes, wall types and lids for stalls, cafés and offices.',
@@ -75,7 +75,7 @@ ${cta('Compare both side by side — <a href="../products/bagasse-tableware.html
 ${cta('Need paper cups wholesale in Hyderabad? <a href="../products/paper-cups.html">Browse the cup range</a> or <a href="../contact.html#quote">get a quote</a>.')}`,
   },
   {
-    slug: 'aluminium-foil-containers-for-biryani-delivery', tag: 'Foil containers', art: 'foil', tone: 'steel', date: '2026-08-22', read: 5,
+    slug: 'aluminium-foil-containers-for-biryani-delivery', cat: 'Packaging Guides', tag: 'Foil containers', art: 'foil', tone: 'steel', date: '2026-08-22', read: 5,
     title: 'Aluminium Foil Containers for Biryani Delivery: A Size Guide',
     metaTitle: 'Aluminium Foil Containers for Biryani Delivery – Size Guide | SLD',
     metaDesc: 'Which aluminium foil container suits single, family-pack and catering biryani? Sizes from 250 ml to 9000 ml explained by an authorised Freshwrapp distributor.',
@@ -104,7 +104,7 @@ ${cta('Need paper cups wholesale in Hyderabad? <a href="../products/paper-cups.h
 ${cta('Looking for aluminium foil containers wholesale? <a href="../products/aluminium-foil.html">See the foil range</a> or <a href="../contact.html#quote">request pricing</a>.')}`,
   },
   {
-    slug: 'kraft-packaging-for-cloud-kitchens', tag: 'Cloud kitchens', art: 'box', tone: 'kraft', date: '2026-08-05', read: 4,
+    slug: 'kraft-packaging-for-cloud-kitchens', cat: 'Packaging Guides', tag: 'Cloud kitchens', art: 'box', tone: 'kraft', date: '2026-08-05', read: 4,
     title: 'Kraft Packaging for Cloud Kitchens: What to Stock',
     metaTitle: 'Kraft Packaging for Cloud Kitchens – What to Stock | SLD Hyderabad',
     metaDesc: 'A starter kit of brown kraft bowls, boxes, bags and wooden cutlery for cloud kitchens, with tips on sizes, lids and keeping packaging cost under control.',
@@ -129,7 +129,7 @@ ${cta('Looking for aluminium foil containers wholesale? <a href="../products/alu
 ${cta('We supply kraft boxes across Telangana and Andhra Pradesh. <a href="../products/kraft-packaging.html">View kraft packaging</a> or <a href="../contact.html#quote">get a starter-kit quote</a>.')}`,
   },
   {
-    slug: 'wholesale-packaging-buying-guide-telangana-andhra-pradesh', tag: 'Buying guide', art: 'container', tone: 'ice', date: '2026-07-18', read: 5,
+    slug: 'wholesale-packaging-buying-guide-telangana-andhra-pradesh', cat: 'Buying Guides', tag: 'Buying guide', art: 'container', tone: 'ice', date: '2026-07-18', read: 5,
     title: 'Wholesale Packaging Buying Guide for Telangana & Andhra Pradesh',
     metaTitle: 'Wholesale Food Packaging Buying Guide – Telangana & AP | SLD',
     metaDesc: 'How to buy food packaging wholesale in Telangana and Andhra Pradesh: comparing quotes, planning quantities, checking quality and choosing a reliable distributor.',
@@ -154,7 +154,7 @@ ${cta('We supply kraft boxes across Telangana and Andhra Pradesh. <a href="../pr
 ${cta('For wholesale food packaging in Hyderabad and across both states, <a href="../contact.html#quote">send us your list</a> — we reply within 24 hours.')}`,
   },
   {
-    slug: 'plastic-ban-compliant-packaging-alternatives', tag: 'Compliance', art: 'plate', tone: 'mint', date: '2026-06-30', read: 5,
+    slug: 'plastic-ban-compliant-packaging-alternatives', cat: 'Industry Tips', tag: 'Compliance', art: 'plate', tone: 'mint', date: '2026-06-30', read: 5,
     title: 'Plastic-Ban-Compliant Packaging Alternatives for Food Businesses',
     metaTitle: 'Plastic-Ban-Compliant Packaging Alternatives in India | SLD Hyderabad',
     metaDesc: 'Which single-use plastic items are restricted, and what to use instead: bagasse plates, paper cups, wooden cutlery, kraft bags and more.',
@@ -178,7 +178,7 @@ ${cta('For wholesale food packaging in Hyderabad and across both states, <a href
 ${cta('Need compliant alternatives quickly? <a href="../products.html">Browse all categories</a> or <a href="../contact.html#quote">ask for a combined quote</a>.')}`,
   },
   {
-    slug: 'housekeeping-supplies-checklist-for-hotels', tag: 'Housekeeping', art: 'spray', tone: 'mint', date: '2026-06-12', read: 4,
+    slug: 'housekeeping-supplies-checklist-for-hotels', cat: 'Industry Tips', tag: 'Housekeeping', art: 'spray', tone: 'mint', date: '2026-06-12', read: 4,
     title: 'Housekeeping Supplies Checklist for Hotels',
     metaTitle: 'Housekeeping Supplies Checklist for Hotels & Lodges | SLD Hyderabad',
     metaDesc: 'A monthly housekeeping supplies checklist for hotels: guest-room, washroom, kitchen and back-of-house items, with tips to control cost and stock.',
@@ -198,7 +198,7 @@ ${cta('Need compliant alternatives quickly? <a href="../products.html">Browse al
 ${cta('We are a housekeeping material supplier for hotels across Telangana and AP. <a href="../products/housekeeping-material.html">See the range</a> or <a href="../contact.html#quote">send your monthly list</a>.')}`,
   },
   {
-    slug: 'packaging-checklist-for-caterers', tag: 'Catering', art: 'foil', tone: 'steel', date: '2026-05-25', read: 4,
+    slug: 'packaging-checklist-for-caterers', cat: 'Industry Tips', tag: 'Catering', art: 'foil', tone: 'steel', date: '2026-05-25', read: 4,
     title: 'Packaging Checklist for Caterers: From 50 to 5,000 Guests',
     metaTitle: 'Catering Disposables Checklist – Plates, Trays, Cups & Tissue | SLD',
     metaDesc: 'A catering packaging checklist covering plates, bowls, foil trays, cups, tissue and garbage bags, with quantity rules of thumb for events of any size.',

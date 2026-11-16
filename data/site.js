@@ -295,6 +295,7 @@ const categories = [
       ['Containers 250–750 ml', '250, 450, 660 and 750 ml containers with lids for single portions.'],
       ['Half-deep tray 3300 ml', 'Party and family-pack tray with lid.'],
       ['Full-deep tray 9000 ml', 'Large catering tray with lid for bulk biryani and curries.'],
+      ['Lids', 'Matching lids for every container and tray size, supplied with the pack or separately.'],
     ],
     uses: ['Biryani and curry delivery', 'Catering and bulk food transport', 'Baking and grilling', 'Roti, roll and sandwich wrapping', 'Retail household packs'],
     guide: ['250 ml for sides and sweets; 450 ml for single curry; 660–750 ml for single biryani.', '3300 ml half-deep trays suit family packs of 4–6 portions.', '9000 ml full-deep trays are for catering quantities.', 'Longer rolls (36 m, 72 m) cost less per metre for commercial kitchens.'],
@@ -353,4 +354,19 @@ const categories = [
   },
 ];
 
-module.exports = { company, stats, areas, popularSearches, heroSlides, approach, steps, why, testimonials, faqs, timeline, categories };
+// ── Main menu ────────────────────────────────────────────────
+// Products mega menu: [label shown in menu, index of the sub-range in that category's "sub" list]
+const productMenu = {
+  'bagasse-tableware': { name: 'Bagasse Tableware', items: [['Plates', 0], ['Compartment Plates', 1], ['Bowls', 2], ['Clamshells', 3], ['Meal Trays', 4], ['Cups', 5]] },
+  'paper-cups': { name: 'Paper Cups', items: [['Single Wall', 0], ['Double Wall', 1], ['Ripple', 2], ['Tea/Coffee Cups', 3], ['Lids & Sleeves', 4]] },
+  'kraft-packaging': { name: 'Kraft Packaging', items: [['Kraft Bowls', 0], ['Salad Bowls', 1], ['Food/Noodle Boxes', 2], ['Burger Boxes', 3], ['Paper Bags', 4], ['Wooden Cutlery', 5]] },
+  'pp-plastic-containers': { name: 'PP Containers', items: [['Round', 0], ['Rectangular', 1], ['Microwave-safe', 3], ['Lids', 2]] },
+  'tissue-napkins': { name: 'Tissue & Napkins', items: [['Table Napkins', 0], ['Kitchen Towels', 1], ['Toilet Rolls', 2], ['Facial Tissue', 3]] },
+  'aluminium-foil': { name: 'Aluminium Foil (Freshwrapp)', items: [['Foil Rolls', 0], ['Sheets', 1], ['Containers 250–750 ml', 2], ['Half Deep 3300 ml', 3], ['Full Deep 9000 ml', 4], ['Lids', 5]] },
+  'housekeeping-material': { name: 'Housekeeping Material', items: [['Cleaning Supplies', 0], ['Garbage Bags', 1], ['Gloves', 2], ['Dispensers', 3]] },
+};
+const aboutMenu = [['history', 'Our History'], ['managing-director', 'Managing Director – G. Mahendra'], ['vision-mission', 'Vision & Mission'], ['why-choose-us', 'Why Choose Us']];
+const blogMenu = ['Packaging Guides', 'Eco Packaging', 'Buying Guides', 'Industry Tips'];
+const contactMenu = [['quote', 'Bulk Quote'], ['areas', 'Locations Served'], ['hours', 'Business Hours']];
+
+module.exports = { productMenu, aboutMenu, blogMenu, contactMenu, company, stats, areas, popularSearches, heroSlides, approach, steps, why, testimonials, faqs, timeline, categories };

@@ -72,14 +72,23 @@ const visual = (p, slug, kind, alt) => {
 // ── Layout ───────────────────────────────────────────────────
 const logo = (p) => `<a class="logo" href="${p}index.html" aria-label="${C.name} – home"><span class="logo-mark">SLD</span><span class="logo-text">Sri Laxmi <b>Distributor</b></span></a>`;
 
-const NAV = [['products.html', 'Products'], ['catalogue.html', 'Catalogue'], ['about.html', 'About us'], ['blog.html', 'Blog'], ['contact.html', 'Contact']];
+const slug = (s) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const cur = (active, h) => (active === h ? ' aria-current="page"' : '');
+const subWrap = (label, inner, cls = '') => `<button class="sub-toggle" type="button" aria-expanded="false" aria-label="Show ${label} menu">${icon('chev')}</button><div class="drop ${cls}"><div class="drop-box">${inner}</div></div>`;
+const navItems = (p, active) => `
+      <li><a href="${p}index.html"${cur(active, '')}>Home</a></li>
+      <li class="has-sub"><a href="${p}about.html"${cur(active, 'about.html')}>About Us</a>${subWrap('About Us', D.aboutMenu.map(([id, t]) => `<a href="${p}about.html#${id}">${esc(t)}</a>`).join(''))}</li>
+      <li class="has-sub mega-li"><a href="${p}products.html"${cur(active, 'products.html')}>Our Products</a>${subWrap('Our Products', CATS.map((c) => { const m = D.productMenu[c.slug]; return `<div class="mega-col"><a class="mega-head" href="${p}products/${c.slug}.html"><span class="dot tone-${c.tone}"></span>${esc(m.name)}</a>${m.items.map(([t, i]) => `<a href="${p}products/${c.slug}.html#${slug(c.sub[i][0])}">${esc(t)}</a>`).join('')}</div>`; }).join('') + `<div class="mega-panel"><b>2,000+ products in stock</b><span>Wholesale and retail, on one invoice.</span><a class="btn btn-dark btn-sm" href="${p}products.html">View all products ${icon('arrow')}</a><a class="btn btn-outline btn-sm" href="${p}catalogue.html">${icon('download')} Download catalogue</a></div>`, 'mega')}</li>
+      <li><a href="${p}catalogue.html"${cur(active, 'catalogue.html')}>Catalogue</a></li>
+      <li class="has-sub"><a href="${p}blog.html"${cur(active, 'blog.html')}>Blog</a>${subWrap('Blog', D.blogMenu.map((t) => `<a href="${p}blog.html?cat=${slug(t)}">${t}</a>`).join(''))}</li>
+      <li class="has-sub"><a href="${p}contact.html"${cur(active, 'contact.html')}>Contact Us</a>${subWrap('Contact Us', D.contactMenu.map(([id, t]) => `<a href="${p}contact.html#${id}">${t}</a>`).join(''))}</li>`;
 
 const header = (p, active) => `
 <header class="nav-wrap">
   <nav class="nav" aria-label="Main">
     ${logo(p)}
     <ul class="nav-links" id="nav-links">
-      ${NAV.map(([h, t]) => `<li><a href="${p}${h}"${active === h ? ' aria-current="page"' : ''}>${t}</a></li>`).join('')}
+      ${navItems(p, active)}
       <li class="nav-only-mobile"><a href="${WA_DEFAULT}" target="_blank" rel="noopener">WhatsApp us</a></li>
     </ul>
     <div class="nav-actions">
@@ -372,14 +381,14 @@ ${pageHero(p, { eyebrow: 'About us', h1: 'Hyderabad\'s packaging partner<br>for 
 </section>
 <section class="sec tint">
   <div class="wrap">
-    <div class="center"><p class="eyebrow">Our history</p><h2>How we got here</h2></div>
+    <div class="center" id="history"><p class="eyebrow">Our history</p><h2>How we got here</h2></div>
     <ol class="timeline">${D.timeline.map((t) => `<li class="reveal"><span class="t-y">${t.y}</span><h3>${t.t}</h3><p>${t.d}</p></li>`).join('')}</ol>
     <div class="btn-row center"><a class="btn btn-outline" href="${p}catalogue.html">${icon('download')} Download catalogue</a></div>
   </div>
 </section>
 <section class="sec">
   <div class="wrap">
-    <div class="md-card">
+    <div class="md-card" id="managing-director">
       <div class="md-photo" aria-hidden="true"><span>GM</span></div>
       <div>
         <p class="eyebrow">Managing Director</p><h2>${C.md}</h2>
@@ -393,7 +402,7 @@ ${pageHero(p, { eyebrow: 'About us', h1: 'Hyderabad\'s packaging partner<br>for 
 </section>
 <section class="sec tint">
   <div class="wrap">
-    <div class="vm">
+    <div class="vm" id="vision-mission">
       <article class="feat"><span class="feat-ic">${icon('leaf')}</span><h3>Our vision</h3><p>To be the most trusted packaging distributor in Telangana and Andhra Pradesh, and to make responsible, eco-friendly packaging the practical choice for every food business — large or small.</p></article>
       <article class="feat"><span class="feat-ic">${icon('check')}</span><h3>Our mission</h3><p>To supply the right product at a fair price, every time: a wide range kept in stock, honest advice on what suits each menu, clear billing and dependable doorstep delivery.</p></article>
     </div>
@@ -401,7 +410,7 @@ ${pageHero(p, { eyebrow: 'About us', h1: 'Hyderabad\'s packaging partner<br>for 
 </section>
 <section class="sec">
   <div class="wrap">
-    <div class="center"><p class="eyebrow">Why choose us</p><h2>Six reasons customers stay</h2></div>
+    <div class="center" id="why-choose-us"><p class="eyebrow">Why choose us</p><h2>Six reasons customers stay</h2></div>
     <div class="feat-grid">${D.why.map((a) => `<article class="feat reveal"><span class="feat-ic">${icon(a.icon)}</span><h3>${a.t}</h3><p>${a.d}</p></article>`).join('')}</div>
     <div class="btn-row center"><a class="btn btn-dark" href="${p}contact.html#quote">Get a bulk quote ${icon('arrow')}</a></div>
   </div>
@@ -448,7 +457,7 @@ CATS.forEach((c) => built.push(page({
 <section class="sec">
   <div class="wrap">
     <p class="eyebrow">What's in the range</p><h2>Sub-ranges</h2>
-    <div class="sub-grid">${c.sub.map(([t, d], i) => `<article class="sub reveal"><span class="num">${String(i + 1).padStart(2, '0')}</span><div><h3>${t}</h3><p>${d}</p></div></article>`).join('')}</div>
+    <div class="sub-grid">${c.sub.map(([t, d], i) => `<article class="sub reveal" id="${slug(t)}"><span class="num">${String(i + 1).padStart(2, '0')}</span><div><h3>${t}</h3><p>${d}</p></div></article>`).join('')}</div>
   </div>
 </section>
 <section class="sec tint">
@@ -517,12 +526,12 @@ built.push(page({
   desc: 'Download the Sri Laxmi Distributor catalogue: a summary of all seven categories – bagasse tableware, paper cups, kraft packaging, PP containers, tissue, Freshwrapp foil and housekeeping.',
   body: (p) => `
 ${pageHero(p, { eyebrow: 'Catalogue', h1: 'The SLD product catalogue', lead: 'A one-document summary of everything we stock. Save it as a PDF to share with your purchase team, or print it for the store room.', trail: [[null, 'Catalogue']],
-    extra: `<div class="btn-row no-print"><button class="btn btn-dark" type="button" data-print>${icon('download')} Download as PDF</button><a class="btn btn-wa" href="${wa('Hello, please send me your latest catalogue and price list.')}" target="_blank" rel="noopener">${icon('wa')} Get price list on WhatsApp</a></div><p class="fine no-print">Tip: in the print window, choose “Save as PDF”.</p>` })}
+    extra: `<div class="btn-row no-print"><button class="btn btn-dark" type="button" data-print>${icon('download')} Download full catalogue (PDF)</button><a class="btn btn-wa" href="${wa('Hello, please send me your latest catalogue and price list.')}" target="_blank" rel="noopener">${icon('wa')} Get price list on WhatsApp</a></div><p class="fine no-print">Tip: in the print window, choose “Save as PDF”.</p>` })}
 <section class="sec">
   <div class="wrap">
     <div class="print-head"><b>${C.name}</b> · Wholesale &amp; retail food packaging and housekeeping material · Hyderabad · ${C.phoneDisplay}${C.email ? ' · ' + C.email : ''}</div>
     ${CATS.map((c, i) => `
-    <article class="cat-sheet">
+    <article class="cat-sheet" id="${c.slug}">
       <div class="cat-sheet-art tone-${c.tone}">${visual(p, c.slug, c.art, `${c.name} catalogue – SLD Hyderabad`)}</div>
       <div>
         <p class="eyebrow">Category ${String(i + 1).padStart(2, '0')}</p>
@@ -530,7 +539,7 @@ ${pageHero(p, { eyebrow: 'Catalogue', h1: 'The SLD product catalogue', lead: 'A 
         <h3>What's inside</h3>
         <ul class="inside">${c.sub.map(([t, d]) => `<li><b>${t}</b> — ${d}</li>`).join('')}</ul>
         <p class="fine"><b>Popular items:</b> ${c.products.map((x) => x.name).join(' · ')}</p>
-        <a class="link-arrow no-print" href="${p}products/${c.slug}.html">View ${c.name} ${icon('arrow')}</a>
+        <div class="btn-row no-print"><button class="btn btn-dark btn-sm" type="button" data-print-one>${icon('download')} Download PDF</button><a class="btn btn-outline btn-sm" href="${p}products/${c.slug}.html">View range ${icon('arrow')}</a></div>
       </div>
     </article>`).join('')}
     <div class="note">${icon('doc')}<p><b>Need current prices?</b> Rates change with volume and market. Send your list and we will reply with item-wise pricing within 24 hours.</p><a class="btn btn-dark btn-sm no-print" href="${p}contact.html#quote">Get a quote</a></div>
@@ -540,9 +549,9 @@ ${pageHero(p, { eyebrow: 'Catalogue', h1: 'The SLD product catalogue', lead: 'A 
 
 // BLOG INDEX + POSTS
 const postCard = (p, b) => `
-<a class="post-card" href="${p}blog/${b.slug}.html">
+<a class="post-card" data-cat="${slug(b.cat)}" href="${p}blog/${b.slug}.html">
   <span class="post-art tone-${b.tone}">${artSvg(b.art, b.title)}</span>
-  <span class="post-body"><small>${b.tag} · ${b.read} min read</small><b>${b.title}</b><span>${b.excerpt}</span><em>Read article ${icon('arrow')}</em></span>
+  <span class="post-body"><small>${b.cat} · ${b.read} min read</small><b>${b.title}</b><span>${b.excerpt}</span><em>Read article ${icon('arrow')}</em></span>
 </a>`;
 built.push(page({
   file: 'blog.html', active: 'blog.html',
@@ -550,7 +559,9 @@ built.push(page({
   desc: 'Practical packaging guides from Sri Laxmi Distributor: eco-friendly options, bagasse vs plastic, paper cup sizes, foil containers for biryani, kraft for cloud kitchens and more.',
   body: (p) => `
 ${pageHero(p, { eyebrow: 'Blog', h1: 'Small guides<br>for better buying', lead: 'Plain advice on choosing, sizing and buying food packaging — written from 24+ years behind the counter.', trail: [[null, 'Blog']] })}
-<section class="sec"><div class="wrap"><div class="post-grid">${posts.map((b) => postCard(p, b)).join('')}</div>
+<section class="sec"><div class="wrap">
+  <div class="quick blog-cats" data-blogcats><a href="${p}blog.html" data-cat="">All articles</a>${D.blogMenu.map((t) => `<a href="${p}blog.html?cat=${slug(t)}" data-cat="${slug(t)}">${t}</a>`).join('')}</div>
+  <div class="post-grid">${posts.map((b) => postCard(p, b)).join('')}</div>
   <div class="btn-row center"><a class="btn btn-dark" href="${p}contact.html#quote">Have a question? Ask us ${icon('arrow')}</a></div></div></section>`,
 }));
 posts.forEach((b, i) => {
@@ -588,8 +599,8 @@ ${pageHero(p, { eyebrow: 'Contact', h1: 'Tell us what you need.<br>We will quote
       <a class="who" href="${WA_DEFAULT}" target="_blank" rel="noopener"><span class="who-ic wa">${icon('wa')}</span><span><b>WhatsApp</b><small>Fastest way to send a list</small></span>${icon('chev')}</a>
       ${C.email ? `<a class="who" href="mailto:${C.email}"><span class="who-ic">${icon('mail')}</span><span><b>Email</b><small>${C.email}</small></span>${icon('chev')}</a>` : ''}
       <div class="who"><span class="who-ic">${icon('pin')}</span><span><b>Visit us</b><small>${C.addressLines.join(', ')}</small></span></div>
-      <div class="who"><span class="who-ic">${icon('clock')}</span><span><b>Business hours</b><small>${C.hours} · Sunday closed</small></span></div>
-      <div class="panel areas-panel"><h2 class="h-xs">Areas served</h2>${Object.entries(D.areas).map(([st, cities]) => `<p><b>${st}</b><br>${cities.join(', ')}</p>`).join('')}</div>
+      <div class="who" id="hours"><span class="who-ic">${icon('clock')}</span><span><b>Business hours</b><small>${C.hours} · Sunday closed</small></span></div>
+      <div class="panel areas-panel" id="areas"><h2 class="h-xs">Areas served</h2>${Object.entries(D.areas).map(([st, cities]) => `<p><b>${st}</b><br>${cities.join(', ')}</p>`).join('')}</div>
     </div>
     <form class="quote" id="quote" novalidate>
       <p class="eyebrow">Bulk quote form</p><h2>Request a quote</h2>

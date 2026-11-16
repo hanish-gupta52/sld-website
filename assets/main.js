@@ -11,6 +11,34 @@
     toggle.setAttribute('aria-expanded', open);
   });
 
+  // Dropdown / mega menu toggles (tap on mobile, click or keyboard on desktop)
+  const subs = $$('.has-sub');
+  subs.forEach((li) => $('.sub-toggle', li).addEventListener('click', () => {
+    const open = !li.classList.contains('open');
+    subs.forEach((o) => { o.classList.remove('open'); $('.sub-toggle', o).setAttribute('aria-expanded', 'false'); });
+    li.classList.toggle('open', open); $('.sub-toggle', li).setAttribute('aria-expanded', open);
+  }));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') subs.forEach((o) => { o.classList.remove('open'); if (o.contains(document.activeElement)) document.activeElement.blur(); }); });
+  // Same-page menu links (e.g. Contact → Bulk Quote) should close the mobile menu
+  $('.drop-box a').forEach((a) => a.addEventListener('click', () => { if (links) links.classList.remove('open'); if (toggle) toggle.setAttribute('aria-expanded', 'false'); subs.forEach((o) => o.classList.remove('open')); }));
+
+  // Blog category filter (blog.html?cat=…)
+  const blogCats = $('[data-blogcats]');
+  if (blogCats) {
+    const cat = new URLSearchParams(location.search).get('cat') || '';
+    $$('a', blogCats).forEach((a) => a.classList.toggle('on', a.dataset.cat === cat));
+    if (cat) $$('.post-card[data-cat]').forEach((c) => { c.hidden = c.dataset.cat !== cat; });
+  }
+
+  // Catalogue: download one category as PDF
+  $$('[data-print-one]').forEach((b) => b.addEventListener('click', () => {
+    const sheet = b.closest('.cat-sheet');
+    document.body.classList.add('print-one'); sheet.classList.add('print-me');
+    const done = () => { document.body.classList.remove('print-one'); sheet.classList.remove('print-me'); window.removeEventListener('afterprint', done); };
+    window.addEventListener('afterprint', done);
+    window.print();
+  }));
+
   // Scroll reveal
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
