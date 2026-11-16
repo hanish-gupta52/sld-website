@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hanish-gupta52.github.io/sld-website/sitemap.xml
