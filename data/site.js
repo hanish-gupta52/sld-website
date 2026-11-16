@@ -8,11 +8,11 @@ const company = {
   short: 'SLD',
   md: 'G. Mahendra',
   // TODO: replace every placeholder below with the real details
-  phoneDisplay: '+91 00000 00000',      // shown on the site
-  phoneDial: '+910000000000',           // used in tel: links
-  whatsapp: '910000000000',             // country code + number, digits only (wa.me)
-  email: 'sales@example.com',
-  addressLines: ['Sri Laxmi Distributor', 'Your street address', 'Hyderabad, Telangana'],
+  phoneDisplay: '+91 95509 00042',      // shown on the site
+  phoneDial: '+919550900042',           // used in tel: links
+  whatsapp: '919550900042',             // country code + number, digits only (wa.me)
+  email: '',                            // add the real email here; it stays hidden while empty
+  addressLines: ['Sri Laxmi Distributor', 'GR Palace, Gandhi Nagar', 'Hyderabad, Telangana 500080'],
   mapsUrl: '',                          // Google Maps link (optional)
   hours: 'Mon–Sat, 9am–8pm',
   siteUrl: 'https://hanish-gupta52.github.io/sld-website', // live address, no trailing slash (change when you get a domain)

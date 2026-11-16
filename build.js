@@ -136,7 +136,7 @@ const footer = (p) => `
       <div><h3>Contact</h3><ul class="contact-list">
         <li>${icon('phone')}<a href="tel:${C.phoneDial}">${C.phoneDisplay}</a></li>
         <li>${icon('wa')}<a href="${WA_DEFAULT}" target="_blank" rel="noopener">WhatsApp</a></li>
-        <li>${icon('mail')}<a href="mailto:${C.email}">${C.email}</a></li>
+        ${C.email ? `<li>${icon('mail')}<a href="mailto:${C.email}">${C.email}</a></li>` : ''}
         <li>${icon('pin')}<span>${C.addressLines.slice(1).join(', ')}</span></li>
         <li>${icon('clock')}<span>${C.hours}</span></li></ul></div>
       <div><h3>Areas served</h3>
@@ -520,7 +520,7 @@ ${pageHero(p, { eyebrow: 'Catalogue', h1: 'The SLD product catalogue', lead: 'A 
     extra: `<div class="btn-row no-print"><button class="btn btn-dark" type="button" data-print>${icon('download')} Download as PDF</button><a class="btn btn-wa" href="${wa('Hello, please send me your latest catalogue and price list.')}" target="_blank" rel="noopener">${icon('wa')} Get price list on WhatsApp</a></div><p class="fine no-print">Tip: in the print window, choose “Save as PDF”.</p>` })}
 <section class="sec">
   <div class="wrap">
-    <div class="print-head"><b>${C.name}</b> · Wholesale &amp; retail food packaging and housekeeping material · Hyderabad · ${C.phoneDisplay} · ${C.email}</div>
+    <div class="print-head"><b>${C.name}</b> · Wholesale &amp; retail food packaging and housekeeping material · Hyderabad · ${C.phoneDisplay}${C.email ? ' · ' + C.email : ''}</div>
     ${CATS.map((c, i) => `
     <article class="cat-sheet">
       <div class="cat-sheet-art tone-${c.tone}">${visual(p, c.slug, c.art, `${c.name} catalogue – SLD Hyderabad`)}</div>
@@ -578,7 +578,7 @@ posts.forEach((b, i) => {
 built.push(page({
   file: 'contact.html', active: 'contact.html',
   title: 'Contact Sri Laxmi Distributor | Bulk Quote for Food Packaging, Hyderabad',
-  desc: 'Call, WhatsApp or email Sri Laxmi Distributor, Hyderabad for a bulk quote on food packaging and housekeeping material. Open Mon–Sat, 9am–8pm. Reply within 24 hours.',
+  desc: 'Call or WhatsApp Sri Laxmi Distributor, Hyderabad for a bulk quote on food packaging and housekeeping material. Open Mon–Sat, 9am–8pm. Reply within 24 hours.',
   body: (p) => `
 ${pageHero(p, { eyebrow: 'Contact', h1: 'Tell us what you need.<br>We will quote within 24 hours.', lead: 'Call, message or fill in the form — whichever is easiest. A real person from our team will reply.', trail: [[null, 'Contact']] })}
 <section class="sec">
@@ -586,7 +586,7 @@ ${pageHero(p, { eyebrow: 'Contact', h1: 'Tell us what you need.<br>We will quote
     <div class="contact-cards">
       <a class="who" href="tel:${C.phoneDial}"><span class="who-ic">${icon('phone')}</span><span><b>Call us</b><small>${C.phoneDisplay}</small></span>${icon('chev')}</a>
       <a class="who" href="${WA_DEFAULT}" target="_blank" rel="noopener"><span class="who-ic wa">${icon('wa')}</span><span><b>WhatsApp</b><small>Fastest way to send a list</small></span>${icon('chev')}</a>
-      <a class="who" href="mailto:${C.email}"><span class="who-ic">${icon('mail')}</span><span><b>Email</b><small>${C.email}</small></span>${icon('chev')}</a>
+      ${C.email ? `<a class="who" href="mailto:${C.email}"><span class="who-ic">${icon('mail')}</span><span><b>Email</b><small>${C.email}</small></span>${icon('chev')}</a>` : ''}
       <div class="who"><span class="who-ic">${icon('pin')}</span><span><b>Visit us</b><small>${C.addressLines.join(', ')}</small></span></div>
       <div class="who"><span class="who-ic">${icon('clock')}</span><span><b>Business hours</b><small>${C.hours} · Sunday closed</small></span></div>
       <div class="panel areas-panel"><h2 class="h-xs">Areas served</h2>${Object.entries(D.areas).map(([st, cities]) => `<p><b>${st}</b><br>${cities.join(', ')}</p>`).join('')}</div>
@@ -600,7 +600,7 @@ ${pageHero(p, { eyebrow: 'Contact', h1: 'Tell us what you need.<br>We will quote
       <label>Monthly volume<select name="volume"><option value="">Select an estimate</option><option>Below ₹10,000</option><option>₹10,000 – ₹50,000</option><option>₹50,000 – ₹2,00,000</option><option>Above ₹2,00,000</option><option>One-time / event order</option></select></label>
       <label>Message<textarea name="message" rows="4" placeholder="Items, sizes and quantities you need"></textarea></label>
       <p class="form-err" role="alert" hidden>Please fill in your name, phone and city.</p>
-      <div class="btn-row"><button class="btn btn-wa" type="submit">${icon('wa')} Send on WhatsApp</button><a class="btn btn-outline" data-mailto href="mailto:${C.email}">${icon('mail')} Send by email instead</a></div>
+      <div class="btn-row"><button class="btn btn-wa" type="submit">${icon('wa')} Send on WhatsApp</button>${C.email ? `<a class="btn btn-outline" data-mailto href="mailto:${C.email}">${icon('mail')} Send by email instead</a>` : ''}</div>
     </form>
   </div>
 </section>`,

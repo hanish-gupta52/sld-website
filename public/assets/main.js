@@ -59,7 +59,7 @@
   // Catalogue → PDF
   $$('[data-print]').forEach((b) => b.addEventListener('click', () => window.print()));
 
-  // Quote form → WhatsApp / email (no data is stored on the site)
+  // Quote form → WhatsApp or email (no data is stored on the site)
   const form = $('#quote');
   if (form) {
     const compose = () => {
@@ -70,6 +70,6 @@
     const valid = () => { const ok = ['name', 'phone', 'city'].every((k) => form.elements[k].value.trim()); $('.form-err', form).hidden = ok; return ok; };
     form.addEventListener('submit', (e) => { e.preventDefault(); if (valid()) window.open(`https://wa.me/${window.SLD.wa}?text=${encodeURIComponent(compose())}`, '_blank', 'noopener'); });
     const mail = $('[data-mailto]', form);
-    mail.addEventListener('click', (e) => { if (!valid()) return e.preventDefault(); mail.href = `${mail.href.split('?')[0]}?subject=${encodeURIComponent('Bulk quote request')}&body=${encodeURIComponent(compose())}`; });
+    if (mail) mail.addEventListener('click', (e) => { if (!valid()) return e.preventDefault(); mail.href = `${mail.href.split('?')[0]}?subject=${encodeURIComponent('Bulk quote request')}&body=${encodeURIComponent(compose())}`; });
   }
 })();
